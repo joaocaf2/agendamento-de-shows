@@ -1,4 +1,4 @@
-package com.agendamento.shows;
+package com.agendamento.shows.conf;
 
 import javax.sql.DataSource;
 
@@ -22,7 +22,7 @@ public class DataConfiguration {
 	private DriverManagerDataSource configuraDadosDoMySQL() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/shows");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/shows?createDatabaseIfNotExist=true");
 		dataSource.setUsername(System.getenv("userBd"));
 		dataSource.setPassword(System.getenv("passwdBd"));
 		return dataSource;
@@ -32,7 +32,7 @@ public class DataConfiguration {
 	public JpaVendorAdapter jpaVendorAdapter() {
 		HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
 		adapter.setDatabase(Database.MYSQL);
-		adapter.setShowSql(false);
+		adapter.setShowSql(true);
 		adapter.setGenerateDdl(true);
 		adapter.setDatabasePlatform("org.hibernate.dialect.MySQL5Dialect");
 		adapter.setPrepareConnection(true);
