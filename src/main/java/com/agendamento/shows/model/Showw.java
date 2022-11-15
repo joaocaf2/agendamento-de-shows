@@ -15,8 +15,8 @@ public class Showw {
 	private Long id;
 	private String nome;
 	private String descricao;
-	private BigDecimal valor;
-	private String imagemShow;
+	private BigDecimal valorIngresso;
+	private String posterShow;
 
 	public Showw() {
 
@@ -25,21 +25,22 @@ public class Showw {
 	public Showw(String nome, String descricao, BigDecimal valor) {
 		this.nome = nome;
 		this.descricao = descricao;
-		this.valor = valor;
+		this.valorIngresso = valor;
 	}
+
 	public Showw(String nome, String descricao, BigDecimal valor, String imagemShow) {
 		this.nome = nome;
 		this.descricao = descricao;
-		this.valor = valor;
-		this.imagemShow = imagemShow;
+		this.valorIngresso = valor;
+		this.posterShow = imagemShow;
 	}
 
 	public String getImagemShow() {
-		return imagemShow;
+		return posterShow;
 	}
 
 	public void setImagemShow(String imagemShow) {
-		this.imagemShow = imagemShow;
+		this.posterShow = imagemShow;
 	}
 
 	public Long getId() {
@@ -67,11 +68,11 @@ public class Showw {
 	}
 
 	public BigDecimal getValor() {
-		return valor;
+		return valorIngresso;
 	}
 
-	public void setValor(BigDecimal valor) {
-		this.valor = valor;
+	public void setValorIngresso(BigDecimal valorIngresso) {
+		this.valorIngresso = valorIngresso;
 	}
 
 }
