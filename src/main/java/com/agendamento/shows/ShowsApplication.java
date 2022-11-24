@@ -22,10 +22,10 @@ public class ShowsApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		populaShowsSeNecessario();
+		populaShowsCasoNecessario();
 	}
 
-	private void populaShowsSeNecessario() {
+	private void populaShowsCasoNecessario() {
 		if (showRepository.findAll().isEmpty()) {
 			Showw show = new Showw();
 			show.setNome("Gun n roses");
