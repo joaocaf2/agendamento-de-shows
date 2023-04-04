@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Cadastro de show</title>
+<th:block th:include="~{fragments/base::head}">/>
+
+</head>
+<body>
+
+	<header>
+		<div th:replace="~{fragments/base::cabecalho}"></div>
+	</header>
+	<main>
+		<div class="formulario">
+			<form method="post" th:action="@{/show/cadastrar}">
+				<label th:text="${sucesso}"></label>
+				<div class="form-group">
+					<input type="text" name="nome" class="form form-control"
+						placeholder="Nome do show">
+				</div>
+				<div class="form-group">
+					<input type="text" name="descricao" class="form form-control"
+						placeholder="Descrição do show">
+				</div>
+				<div class="form-group">
+					<input type="text" name="imagemShow" class="form form-control"
+						placeholder="Url do pôster do show">
+				</div>
+				<button type="submit" class="btn btn-primary">Cadastrar</button>
+			</form>
+		</div>
+
+	</main>
+	<div th:replace="~{fragments/base::rodape}"></div>
+
+
+</body>
+</html>

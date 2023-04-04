@@ -16,7 +16,7 @@ public class Showw {
 	private String nome;
 	private String descricao;
 	private BigDecimal valorIngresso;
-	private String posterShow;
+	private String imagemShow;
 
 	public Showw() {
 
@@ -32,15 +32,15 @@ public class Showw {
 		this.nome = nome;
 		this.descricao = descricao;
 		this.valorIngresso = valor;
-		this.posterShow = imagemShow;
+		this.imagemShow = imagemShow;
 	}
 
 	public String getImagemShow() {
-		return posterShow;
+		return imagemShow;
 	}
 
 	public void setImagemShow(String imagemShow) {
-		this.posterShow = imagemShow;
+		this.imagemShow = imagemShow;
 	}
 
 	public Long getId() {
