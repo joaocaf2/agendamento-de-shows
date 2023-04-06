@@ -1,6 +1,7 @@
 package com.agendamento.shows.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,6 +18,7 @@ public class Showw {
 	private String descricao;
 	private BigDecimal valorIngresso;
 	private String imagemShow;
+	private LocalDate dataShow;
 
 	public Showw() {
 
@@ -53,6 +55,18 @@ public class Showw {
 
 	public String getNome() {
 		return nome;
+	}
+
+	public LocalDate getDataShow() {
+		return dataShow;
+	}
+
+	public void setDataShow(LocalDate dataShow) {
+		this.dataShow = dataShow;
+	}
+
+	public BigDecimal getValorIngresso() {
+		return valorIngresso;
 	}
 
 	public void setNome(String nome) {

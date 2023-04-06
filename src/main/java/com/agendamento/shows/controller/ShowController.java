@@ -2,6 +2,7 @@ package com.agendamento.shows.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,14 +25,16 @@ public class ShowController {
 
 	@PostMapping("/show/cadastrar")
 	public String cadastrar(Showw show, RedirectAttributes attributes) {
-		System.out.println("Show: " + show.getNome() + " " + show.getDescricao() + show.getImagemShow());
 		attributes.addAttribute("sucesso", "Show cadastrado com sucesso");
+		System.out.println("Data do show -> " + show.getDataShow().toString());
 		showRepository.save(show);
 		return "redirect:/";
 	}
 
 	@GetMapping("/show/detalhe/{id}")
-	public String detalheShow(@PathVariable("id") Long id) {
+	public String detalheShow(@PathVariable("id") Long id, Model model) {
+		Showw showBuscado = showRepository.findById(id).get();
+		model.addAttribute("show", showBuscado);
 		return "show/detalhe";
 	}
 
