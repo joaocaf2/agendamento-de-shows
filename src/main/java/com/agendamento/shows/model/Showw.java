@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Showw {
@@ -14,10 +16,13 @@ public class Showw {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotEmpty(message = "Nome do show é obrigatório")
 	private String nome;
 	private String descricao;
+	@NotNull(message = "Valor do ingresso é obrigatório")
 	private BigDecimal valorIngresso;
 	private String imagemShow;
+	@NotNull(message = "Data que o show ocorrerá é obrigatório")
 	private LocalDate dataShow;
 
 	public Showw() {

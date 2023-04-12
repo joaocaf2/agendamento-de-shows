@@ -7,6 +7,7 @@
 
 
 
+
 </head>
 <body>
 
@@ -15,11 +16,14 @@
 	</header>
 	<main>
 		<div class="formulario">
-			<form method="post" th:action="@{/show/cadastrar}">
+			<form method="post" th:object="${show}" th:action="@{/show/cadastrar}">
 				<label th:text="${sucesso}"></label>
 				<div class="form-group">
-					<input type="text" name="nome" class="form form-control"
-						placeholder="Nome do show">
+					<label for="nome">Nome do show</label> <input th:field="*{nome}"
+						type="text" th:errorClass="is-invalid"
+						placeholder="Nome do show" class="form-control">
+					<div class="invalid-feedback" th:errors="*{nome}"></div>
+
 				</div>
 				<div class="form-group">
 					<input type="text" name="descricao" class="form form-control"

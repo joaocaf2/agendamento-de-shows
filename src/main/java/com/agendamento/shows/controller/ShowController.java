@@ -1,8 +1,11 @@
 package com.agendamento.shows.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,15 +22,19 @@ public class ShowController {
 	private ShowRepository showRepository;
 
 	@RequestMapping("/show/formulario/cadastrar")
-	public String formulario() {
+	public String formulario(Showw show) {
 		return "show/formulario";
 	}
 
 	@PostMapping("/show/cadastrar")
-	public String cadastrar(Showw show, RedirectAttributes attributes) {
+	public String cadastrar(@Valid Showw show, BindingResult result, Model model, RedirectAttributes attributes) {
 		attributes.addAttribute("sucesso", "Show cadastrado com sucesso");
-		System.out.println("Data do show -> " + show.getDataShow().toString());
-		showRepository.save(show);
+		if (result.hasErrors()) {
+			//model.addAttribute("show", show);
+			return "show/formulario";
+		} else {
+			showRepository.save(show);
+		}
 		return "redirect:/";
 	}
 
