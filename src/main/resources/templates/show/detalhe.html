@@ -14,6 +14,7 @@
 
 
 
+
 </head>
 <body>
 
@@ -30,7 +31,10 @@
 				<p class="card-text"
 					th:text="'Preço do ingresso: R$ '+ ${show.valorIngresso}"></p>
 			</div>
-			<button class="btn btn-primary">Comprar ingresso</button>
+
+			<a th:href="@{/pagamento/checkout-pro}">
+				<button class="btn btn-primary">Comprar ingresso</button>
+			</a>
 		</div>
 
 	</main>

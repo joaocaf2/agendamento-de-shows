@@ -30,7 +30,6 @@ public class ShowController {
 	public String cadastrar(@Valid Showw show, BindingResult result, Model model, RedirectAttributes attributes) {
 		attributes.addAttribute("sucesso", "Show cadastrado com sucesso");
 		if (result.hasErrors()) {
-			//model.addAttribute("show", show);
 			return "show/formulario";
 		} else {
 			showRepository.save(show);
