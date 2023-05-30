@@ -3,6 +3,7 @@ package com.agendamento.shows.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,18 +11,29 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.URL;
+
 @Entity
 public class Showw {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
 	@NotEmpty(message = "Nome do show é obrigatório")
 	private String nome;
+
 	private String descricao;
+
 	@NotNull(message = "Valor do ingresso é obrigatório")
 	private BigDecimal valorIngresso;
-	private String imagemShow;
+
+	@URL(message = "Url inválida")
+	@Column(columnDefinition = "VARCHAR(2048)")
+	@Length(max = 2048)
+	private String posterShow;
+
 	@NotNull(message = "Data que o show ocorrerá é obrigatório")
 	private LocalDate dataShow;
 
@@ -29,25 +41,25 @@ public class Showw {
 
 	}
 
-	public Showw(String nome, String descricao, BigDecimal valor) {
+	public Showw(String nome, String descricao, BigDecimal valorIngresso) {
 		this.nome = nome;
 		this.descricao = descricao;
-		this.valorIngresso = valor;
+		this.valorIngresso = valorIngresso;
 	}
 
-	public Showw(String nome, String descricao, BigDecimal valor, String imagemShow) {
+	public Showw(String nome, String descricao, BigDecimal valor, String posterShow) {
 		this.nome = nome;
 		this.descricao = descricao;
 		this.valorIngresso = valor;
-		this.imagemShow = imagemShow;
+		this.posterShow = posterShow;
 	}
 
 	public String getImagemShow() {
-		return imagemShow;
+		return posterShow;
 	}
 
 	public void setImagemShow(String imagemShow) {
-		this.imagemShow = imagemShow;
+		this.posterShow = imagemShow;
 	}
 
 	public Long getId() {
