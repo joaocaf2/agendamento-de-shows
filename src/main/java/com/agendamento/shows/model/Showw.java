@@ -14,6 +14,8 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.URL;
 
+import com.agendamento.shows.validator.DescricaoTamanho;
+
 @Entity
 public class Showw {
 
@@ -24,6 +26,7 @@ public class Showw {
 	@NotEmpty(message = "Nome do show é obrigatório")
 	private String nome;
 
+	@DescricaoTamanho
 	private String descricao;
 
 	@NotNull(message = "Valor do ingresso é obrigatório")
