@@ -14,7 +14,7 @@ import javax.validation.Payload;
 @Constraint(validatedBy = DescricaoValidator.class)
 @Documented
 public @interface DescricaoTamanho {
-	String message() default "A descrição deve ter um tamanho específico";
+	String message() default "A descrição deve ter no mínimo 50 caracteres";
 
 	Class<?>[] groups() default {};
 

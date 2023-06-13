@@ -27,6 +27,7 @@ public class Showw {
 	private String nome;
 
 	@DescricaoTamanho
+	@Length(max = 2048,message = "Máximo de 2048 caracteres")
 	private String descricao;
 
 	@NotNull(message = "Valor do ingresso é obrigatório")
