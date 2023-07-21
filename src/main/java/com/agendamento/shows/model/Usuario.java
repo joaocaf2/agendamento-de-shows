@@ -1,20 +1,26 @@
 package com.agendamento.shows.model;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 public class Usuario implements UserDetails {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	private String email;
 	private String senha;
 	private boolean ativo;
+
+	@OneToMany
+	private List<Role> roles;
 
 	public Usuario() {
 		setAtivo(true);
@@ -52,13 +58,11 @@ public class Usuario implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		// TODO Auto-generated method stub
 		return this.senha;
 	}
 
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
 		return this.email;
 	}
 

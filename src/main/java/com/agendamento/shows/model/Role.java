@@ -13,11 +13,11 @@ public class Role implements GrantedAuthority {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	private String nomeRole;
+	private String nome;
 
 	@Override
 	public String getAuthority() {
-		return this.nomeRole;
+		return this.nome;
 	}
 
 }
