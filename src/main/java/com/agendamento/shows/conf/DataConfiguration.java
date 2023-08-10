@@ -21,7 +21,7 @@ public class DataConfiguration {
 
 	private DriverManagerDataSource configuraDadosDoMySQL() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+		dataSource.setDriverClassName("org.mariadb.jdbc.Driver");
 		dataSource.setUrl("jdbc:mysql://localhost:3306/shows?createDatabaseIfNotExist=true");
 		dataSource.setUsername(System.getenv("userBd"));
 		dataSource.setPassword(System.getenv("passwdBd"));

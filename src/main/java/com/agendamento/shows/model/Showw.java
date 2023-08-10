@@ -27,7 +27,7 @@ public class Showw {
 	private String nome;
 
 	@DescricaoTamanho
-	@Length(max = 2048,message = "Máximo de 2048 caracteres")
+	@Length(max = 2048, message = "Máximo de 2048 caracteres")
 	private String descricao;
 
 	@NotNull(message = "Valor do ingresso é obrigatório")
@@ -58,12 +58,12 @@ public class Showw {
 		this.posterShow = posterShow;
 	}
 
-	public String getImagemShow() {
-		return posterShow;
+	public String getPosterShow() {
+		return this.posterShow;
 	}
 
-	public void setImagemShow(String imagemShow) {
-		this.posterShow = imagemShow;
+	public void setPosterShow(String posterShow) {
+		this.posterShow = posterShow;
 	}
 
 	public Long getId() {
