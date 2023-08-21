@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import com.agendamento.shows.model.Usuario;
 import com.agendamento.shows.repository.UsuarioRepository;
 
-
 @Component
 public class UserDetailsServiceImpl implements UserDetailsService {
 

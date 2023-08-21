@@ -6,6 +6,9 @@
 <th:block th:include="~{fragments/base::head}">/>
 
 
+
+
+
 </head>
 <body>
 
@@ -14,7 +17,20 @@
 	</header>
 	<main>
 		<div>
-			Login
+			<form th:action="@{/login}" method="post">
+				<label>Login</label>
+				<div class="form-group">
+					<input type="text" name="username" placeholder="Login"
+						class="form-control">
+				</div>
+				<div>
+					<input type="password" name="password" placeholder="Senha"
+						class="form-control">
+				</div>
+				<div>
+					<button class="btn btn-primary">Login</button>
+				</div>
+			</form>
 		</div>
 	</main>
 	<div th:replace="~{fragments/base::rodape}"></div>

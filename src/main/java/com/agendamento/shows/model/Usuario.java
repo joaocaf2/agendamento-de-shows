@@ -4,9 +4,12 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -19,7 +22,8 @@ public class Usuario implements UserDetails {
 	private String senha;
 	private boolean ativo;
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
+	@Cascade(CascadeType.PERSIST)
 	private List<Role> roles;
 
 	public Usuario() {
@@ -46,14 +50,25 @@ public class Usuario implements UserDetails {
 		return senha;
 	}
 
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.roles;
 	}
 
 	@Override

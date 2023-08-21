@@ -8,23 +8,25 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import ch.qos.logback.core.net.LoginAuthenticator;
-
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private UserDetailsServiceImpl userDetailsServiceImpl;
+	@Autowired
+	private LoginSucessHandler loginSucessHandler;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		 http.csrf().disable()
-         .authorizeRequests()
-         .antMatchers("/login").permitAll()
-         .antMatchers("/**").authenticated()
-         .and().formLogin()
-         .loginPage("/login");
+		http.authorizeRequests().antMatchers("/login").permitAll().antMatchers("/produto/formulario/**").hasRole("ADM")
+				.antMatchers("/js/**").permitAll().antMatchers("/css/**").permitAll().antMatchers("/carrinho")
+				.permitAll().antMatchers("/desenvolvedor").permitAll().antMatchers("/cliente/**").permitAll()
+				.antMatchers("/sessaotimeout").permitAll().anyRequest().authenticated().and()
+				.formLogin(form -> form.loginPage("/login").successHandler(loginSucessHandler).permitAll()
+						.loginProcessingUrl("/login").failureUrl("/login?erro=1"))
+				.logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/").deleteCookies("JSESSIONID")).csrf()
+				.disable();
 	}
 
 	@Override
