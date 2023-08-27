@@ -54,7 +54,7 @@ public class ShowsApplication implements CommandLineRunner {
 		System.out.println("cadastrando usuario adm...");
 		Usuario usuario = new Usuario();
 		usuario.setEmail("admin");
-		usuario.setSenha(new BCryptPasswordEncoder().encode("102938"));
+		usuario.setSenha(new BCryptPasswordEncoder().encode(System.getenv("passwdAdm")));
 		Role role = new Role();
 		role.setNome("ADM");
 		roleRepository.save(role);
