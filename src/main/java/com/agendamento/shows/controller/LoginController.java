@@ -14,7 +14,6 @@ public class LoginController {
 	public String login(@RequestParam(value = "erro", required = false) Integer erro, Model model, String username,
 			String password, HttpServletRequest request) {
 		if (erro != null && erro == 1) {
-			System.out.println("Deu erro no login");
 			model.addAttribute("erro",
 					"Falha no login: E-mail ou senha incorretos. Ou talvez você ainda não tenha ativado sua conta.");
 		}
