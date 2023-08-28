@@ -14,6 +14,8 @@
 	<description>Agendamento de shows e compra de ingressos</description>
 	<properties>
 		<java.version>15</java.version>
+		<maven.compiler.source>15</maven.compiler.source>
+		<maven.compiler.target>15</maven.compiler.target>
 	</properties>
 	<dependencies>
 		<dependency>
