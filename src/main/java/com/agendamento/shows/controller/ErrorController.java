@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class ErroController implements org.springframework.boot.web.servlet.error.ErrorController {
+public class ErrorController implements org.springframework.boot.web.servlet.error.ErrorController {
 
 	@RequestMapping("/error")
 	public String handleError(HttpServletRequest request, Model model) {
@@ -19,7 +19,6 @@ public class ErroController implements org.springframework.boot.web.servlet.erro
 			Integer statusCode = Integer.valueOf(status.toString());
 
 			if (statusCode == HttpStatus.NOT_FOUND.value()) {
-				System.out.println("erro 404");
 				// return "error";
 			} else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
 				// return "error";

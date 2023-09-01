@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8">
-<title>Cadastro de show</title>
-<link rel="stylesheet" th:href="@{/css/detalheshow.css}" />
-<th:block th:include="~{fragments/base::head}">/>
+	<meta charset="utf-8">
+	<title>Cadastro de show</title>
+	<link rel="stylesheet" th:href="@{/css/detalheshow.css}" />
+	<th:block th:include="~{fragments/base::head}">/>
 
 
 </head>
+
 <body>
 
 	<header>
@@ -15,18 +17,19 @@
 	</header>
 	<main>
 		<div class="card detalhe-show" style="width: 18rem;">
-			<img class="card-img-top" width="800px" height="400px"
-				th:src="${show.posterShow}" alt="Card image cap">
+			<img class="card-img-top" width="800px" height="400px" th:src="${show.posterShow}" alt="Card image cap">
 			<div class="card-body">
 				<h5 class="card-title" th:text="${show.nome}"></h5>
 				<p class="card-text" th:text="${show.descricao}"></p>
-				<p class="card-text"
-					th:text="'Preço do ingresso: R$ '+ ${show.valorIngresso}"></p>
+				<p class="card-text" th:text="'Preço do ingresso: R$ '+ ${show.valorIngresso}"></p>
 			</div>
 
-			<a th:href="@{/pagamento/checkout-pro}">
-				<button class="btn btn-primary">Comprar ingresso</button>
-			</a>
+			<form th:action="@{/pagamento/checkoutproform}" th:object="${show}" method="post">
+				<input type="hidden" name="idShow" th:field="*{id}">
+				<button type="submit" class="btn btn-primary">
+					Comprar ingresso</button>
+
+			</form>
 		</div>
 
 	</main>
@@ -34,4 +37,5 @@
 
 
 </body>
+
 </html>

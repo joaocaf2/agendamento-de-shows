@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,6 +16,7 @@ import com.agendamento.shows.model.Usuario;
 import com.agendamento.shows.repository.RoleRepository;
 import com.agendamento.shows.repository.ShowRepository;
 import com.agendamento.shows.repository.UsuarioRepository;
+import com.mercadopago.MercadoPagoConfig;
 
 @SpringBootApplication
 public class ShowsApplication implements CommandLineRunner {
@@ -27,6 +29,9 @@ public class ShowsApplication implements CommandLineRunner {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
+	@Value("${mercadopago_access_token}")
+	private String mercadoPagoAccessToken;
+
 	public static void main(String[] args) {
 		SpringApplication.run(ShowsApplication.class, args);
 	}
@@ -34,6 +39,14 @@ public class ShowsApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		populaShowsIniciaisCasoNecessario();
+		if (verificaSeNaoExisteUsuarioAdmNoBd()) {
+			criaOUsuarioAdminInicialSeNecessario();
+		}
+		setaTokensDeConfiguracaoMP();
+	}
+
+	private void setaTokensDeConfiguracaoMP() {
+		MercadoPagoConfig.setAccessToken(mercadoPagoAccessToken);
 	}
 
 	private void populaShowsIniciaisCasoNecessario() {
@@ -44,9 +57,6 @@ public class ShowsApplication implements CommandLineRunner {
 			show = criaUmShow("A7x", "Show Avenged Sevenfold em SP", new BigDecimal("1200.0"),
 					"https://i.etsystatic.com/6608809/r/il/921fcd/3555531381/il_794xN.3555531381_nbdc.jpg");
 			showRepository.save(show);
-		}
-		if (verificaSeNaoExisteUsuarioAdmNoBd()) {
-			criaOUsuarioAdminInicialSeNecessario();
 		}
 	}
 

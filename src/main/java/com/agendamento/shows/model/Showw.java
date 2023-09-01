@@ -110,4 +110,9 @@ public class Showw {
 		this.valorIngresso = valorIngresso;
 	}
 
+	@Override
+	public String toString() {
+		return "Show: " + getNome() + " Valor Ingresso: " + getValorIngresso();
+	}
+
 }
