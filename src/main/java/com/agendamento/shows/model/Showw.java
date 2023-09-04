@@ -112,7 +112,7 @@ public class Showw {
 
 	@Override
 	public String toString() {
-		return "Show: " + getNome() + " Valor Ingresso: " + getValorIngresso();
+		return "Show: " + getNome() + "Descrição: " + getDescricao() + " Valor Ingresso: " + getValorIngresso();
 	}
 
 }

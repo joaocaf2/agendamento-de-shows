@@ -22,10 +22,26 @@ public class DataConfiguration {
 	private DriverManagerDataSource configuraDadosDoMySQL() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("org.mariadb.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/shows?createDatabaseIfNotExist=true");
+		String host;
+		host = determinaOLocalHost();
+		dataSource.setUrl("jdbc:mysql://" + host + ":3306/shows?createDatabaseIfNotExist=true");
 		dataSource.setUsername(System.getenv("userBd"));
 		dataSource.setPassword(System.getenv("passwdBd"));
 		return dataSource;
+	}
+
+	private String determinaOLocalHost() {
+		String host;
+		if (localHostNaoInformado()) {
+			host = "localhost";
+		} else {
+			host = System.getenv("MYSQL_HOST");
+		}
+		return host;
+	}
+
+	private boolean localHostNaoInformado() {
+		return System.getenv("MYSQL_HOST") == null;
 	}
 
 	@Bean
@@ -34,7 +50,7 @@ public class DataConfiguration {
 		adapter.setDatabase(Database.MYSQL);
 		adapter.setShowSql(false);
 		adapter.setGenerateDdl(true);
-		adapter.setDatabasePlatform("org.hibernate.dialect.MySQL5Dialect");
+		adapter.setDatabasePlatform("com.agendamento.shows.conf.MySQLDialeto");
 		adapter.setPrepareConnection(true);
 		return adapter;
 	}
