@@ -11,9 +11,9 @@ import javax.validation.Payload;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = DescricaoValidator.class)
+@Constraint(validatedBy = StringMinValidator.class)
 @Documented
-public @interface DescricaoTamanho {
+public @interface StringMinimoCaracterOpcional {
 	String message() default "A descrição deve ter no mínimo 50 caracteres";
 
 	Class<?>[] groups() default {};
@@ -21,4 +21,6 @@ public @interface DescricaoTamanho {
 	Class<? extends Payload>[] payload() default {};
 
 	String value() default "";
+	
+	int minimo() default 50;
 }

@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.URL;
 
-import com.agendamento.shows.validator.DescricaoTamanho;
+import com.agendamento.shows.validator.StringMinimoCaracterOpcional;
 
 @Entity
 public class Showw {
@@ -26,7 +26,7 @@ public class Showw {
 	@NotEmpty(message = "Nome do show é obrigatório")
 	private String nome;
 
-	@DescricaoTamanho
+	@StringMinimoCaracterOpcional(minimo = 50)
 	@Length(max = 2048, message = "Máximo de 2048 caracteres")
 	private String descricao;
 
