@@ -8,8 +8,8 @@ public class StringMinValidator implements ConstraintValidator<StringMinimoCarac
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
 		String valor = value;
-		if (verificaSeUsuarioNaoInformouUmaString(valor)) {
-			return true; // Não necessito fazer validações!
+		if (verificaSeUsuarioInformouUmaString(valor)) {
+			return true;
 		}
 		if (verificaStringQtdMInima(valor, 50) == true) {
 			return false;
@@ -21,7 +21,7 @@ public class StringMinValidator implements ConstraintValidator<StringMinimoCarac
 		return (str.length() < quantidade);
 	}
 
-	private boolean verificaSeUsuarioNaoInformouUmaString(String str) {
+	private boolean verificaSeUsuarioInformouUmaString(String str) {
 		return str.isEmpty();
 	}
 

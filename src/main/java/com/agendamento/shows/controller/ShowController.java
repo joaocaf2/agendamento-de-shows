@@ -1,17 +1,12 @@
 package com.agendamento.shows.controller;
 
-import java.beans.PropertyEditorSupport;
-import java.math.BigDecimal;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,30 +18,6 @@ import com.agendamento.shows.repository.ShowRepository;
 @Controller
 @RequestMapping("show")
 public class ShowController {
-
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		binder.registerCustomEditor(BigDecimal.class, new PropertyEditorSupport() {
-			String valorIngresso = "";
-
-			@Override
-			public void setAsText(String text) throws IllegalArgumentException {
-				if (text != null && !text.isEmpty()) {
-					valorIngresso = text;
-				}
-				try {
-					converteStringEmBigDecimalNaPropDoInput();
-				} catch (Exception e) {
-					// Seta o valor do input em null porque deu exceção
-					setValue(null);
-				}
-			}
-
-			private void converteStringEmBigDecimalNaPropDoInput() {
-				setValue(new BigDecimal(valorIngresso));
-			}
-		});
-	}
 
 	@Autowired
 	private ShowRepository showRepository;
