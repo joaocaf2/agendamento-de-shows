@@ -15,6 +15,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.URL;
 
 import com.agendamento.shows.validator.StringMinimoCaracterOpcional;
+import com.agendamento.shows.validator.TemQueSerNumero;
 
 @Entity
 public class Showw {
@@ -31,6 +32,7 @@ public class Showw {
 	private String descricao;
 
 	@NotNull(message = "Valor do ingresso é obrigatório")
+	@TemQueSerNumero
 	private BigDecimal valorIngresso;
 
 	@URL(message = "Url inválida")
