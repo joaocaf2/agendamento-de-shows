@@ -1,10 +1,12 @@
 D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\conf\MySQLDialeto.java
 D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\controller\ShowController.java
 D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\repository\RoleRepository.java
-D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\validator\DescricaoValidator.java
+D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\validator\StringMinimoCaracterOpcional.java
+D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\conf\DataConfigurationProduction.java
 D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\conf\SpringSecurityConfig.java
 D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\model\Cliente.java
 D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\controller\HomeController.java
+D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\validator\StringMinValidator.java
 D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\conf\UserDetailsServiceImpl.java
 D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\model\Usuario.java
 D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\repository\ShowRepository.java
@@ -13,7 +15,6 @@ D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\c
 D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\repository\UsuarioRepository.java
 D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\controller\ErrorController.java
 D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\model\Showw.java
-D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\validator\DescricaoTamanho.java
 D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\model\Role.java
 D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\controller\PagamentoController.java
 D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\conf\LoginSucessHandler.java
