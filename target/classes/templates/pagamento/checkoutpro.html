@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Formulário de pagamento Checkout PRO</title>
+	<script src="https://sdk.mercadopago.com/js/v2"></script>
+	<th:block th:include="~{fragments/base::head}">/>
+</head>
+
+<body>
+
+	<header>
+		<div th:replace="~{fragments/base::cabecalho}"></div>
+	</header>
+	<main>
+		<h1>Pagamento com Checkout PRO</h1>
+		<div id="wallet_container"></div>
+	</main>
+	<div th:replace="~{fragments/base::rodape}"></div>
+	<script th:inline="javascript">
+		const mp = new MercadoPago('TEST-3d723a4d-ecdf-4c91-bf1a-b89b4efa37c4');
+		const preferenceId = /*[[${preferenceId}]]*/'default';
+		mp.bricks().create("wallet", "wallet_container", {
+			initialization: {
+				preferenceId: preferenceId,
+			},
+		});
+	</script>
+</body>
+
+</html>
