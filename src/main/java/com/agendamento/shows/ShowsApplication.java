@@ -39,8 +39,9 @@ public class ShowsApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		populaShowsIniciaisCasoNecessario();
-		if (verificaSeNaoExisteUsuarioAdmNoBd()) {
-			criaOUsuarioAdminInicialSeNecessario();
+		if (verificaSeNaoExisteUsuariosNoBd()) {
+			criaUsuarioInicial("admin", System.getenv("passwdAdm"), "ADM");
+			criaUsuarioInicial("usuario", "1234usuariox", "USER");
 		}
 		setaTokensDeConfiguracaoMP();
 	}
@@ -60,13 +61,13 @@ public class ShowsApplication implements CommandLineRunner {
 		}
 	}
 
-	private void criaOUsuarioAdminInicialSeNecessario() {
-		System.out.println("cadastrando usuario adm...");
+	private void criaUsuarioInicial(String email, String senha, String nomeRole) {
+		System.out.println("Cadastrando usuario inicial..." + email);
 		Usuario usuario = new Usuario();
-		usuario.setEmail("admin");
-		usuario.setSenha(new BCryptPasswordEncoder().encode(System.getenv("passwdAdm")));
+		usuario.setEmail(email);
+		usuario.setSenha(new BCryptPasswordEncoder().encode(senha));
 		Role role = new Role();
-		role.setNome("ADM");
+		role.setNome(nomeRole);
 		roleRepository.save(role);
 		usuario.setRoles(Arrays.asList(role));
 		usuarioRepository.save(usuario);
@@ -76,7 +77,7 @@ public class ShowsApplication implements CommandLineRunner {
 		return showRepository.findAll().isEmpty();
 	}
 
-	private boolean verificaSeNaoExisteUsuarioAdmNoBd() {
+	private boolean verificaSeNaoExisteUsuariosNoBd() {
 		return usuarioRepository.findAll().isEmpty();
 	}
 

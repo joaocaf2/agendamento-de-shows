@@ -13,7 +13,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 @Configuration
 @Profile(value = "prod")
-public class DataConfigurationProduction {
+public class DataConfigurationRailwayApp {
 	@Value("${MYSQL_URL}")
 	private String MYSQL_URL;
 

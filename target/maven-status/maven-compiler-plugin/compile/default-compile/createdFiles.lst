@@ -11,10 +11,10 @@ com\agendamento\shows\controller\PagamentoController.class
 com\agendamento\shows\controller\ErrorController.class
 com\agendamento\shows\repository\ShowRepository.class
 com\agendamento\shows\repository\UsuarioRepository.class
+com\agendamento\shows\conf\DataConfigurationRailwayApp.class
 com\agendamento\shows\model\Usuario.class
 com\agendamento\shows\validator\StringMinValidator.class
 com\agendamento\shows\conf\LoginSucessHandler.class
-com\agendamento\shows\conf\DataConfigurationProduction.class
 com\agendamento\shows\validator\StringMinimoCaracterOpcional.class
 com\agendamento\shows\conf\MySQLDialeto.class
 com\agendamento\shows\controller\LoginController.class
