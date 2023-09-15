@@ -2,13 +2,9 @@
 <html>
 
 <head>
-<meta charset="utf-8">
-<title>Cadastro de show</title>
-<th:block th:include="~{fragments/base::head}">/>
-
-
-
-
+	<meta charset="utf-8">
+	<title>Cadastro de show</title>
+	<th:block th:include="~{fragments/base::head}">/>
 </head>
 
 <body>
@@ -22,21 +18,27 @@
 			<form method="post" th:object="${show}" th:action="@{/show/novo}">
 
 				<div class="form-group">
-					<input th:field="*{nome}" type="text" th:errorClass="is-invalid"
-						placeholder="Nome do show" class="form-control">
+					<input th:field="*{nome}" type="text" th:errorClass="is-invalid" placeholder="Nome do show"
+						class="form-control">
 					<div class="invalid-feedback" th:errors="*{nome}"></div>
 				</div>
 
 				<div class="form-group">
-					<input th:field="*{valorIngresso}" class="form-control"
-						th:errorClass="is-invalid" placeholder="Valor do ingresso">
+					<input th:field="*{valorIngresso}" class="form-control" th:errorClass="is-invalid"
+						placeholder="Valor do ingresso">
 					<div class="invalid-feedback" th:errors="*{valorIngresso}"></div>
 				</div>
 
 				<div class="form-group">
-					<textarea class="form-control" th:field="*{descricao}"
-						placeholder="Descrição do show" th:errorClass="is-invalid"></textarea>
+					<textarea class="form-control" th:field="*{descricao}" placeholder="Descrição do show"
+						th:errorClass="is-invalid"></textarea>
 					<div class="invalid-feedback" th:errors="*{descricao}"></div>
+				</div>
+
+				<div class="form-group">
+					<input type="text" th:field="*{posterShow}" class="form-control"
+						th:errorClass="is-invalid" placeholder="Url do pôster do show">
+					<div class="invalid-feedback" th:errors="*{posterShow}"></div>
 				</div>
 
 				<div class="form-group">
@@ -44,6 +46,8 @@
 						th:errorClass="is-invalid" th:field="*{dataShow}">
 					<div class="invalid-feedback" th:errors="*{dataShow}"></div>
 				</div>
+
+
 
 
 				<button type=" submit" class="btn btn-primary">Cadastrar

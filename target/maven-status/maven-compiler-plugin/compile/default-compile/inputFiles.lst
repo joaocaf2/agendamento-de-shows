@@ -7,6 +7,7 @@ D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\m
 D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\controller\HomeController.java
 D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\validator\StringMinValidator.java
 D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\conf\UserDetailsServiceImpl.java
+D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\controller\UsuarioController.java
 D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\model\Usuario.java
 D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\repository\ShowRepository.java
 D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\conf\DataConfiguration.java

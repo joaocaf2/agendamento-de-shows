@@ -6,6 +6,7 @@ com\agendamento\shows\model\Role.class
 com\agendamento\shows\conf\DataConfiguration.class
 com\agendamento\shows\model\Showw.class
 com\agendamento\shows\repository\RoleRepository.class
+com\agendamento\shows\controller\UsuarioController.class
 com\agendamento\shows\model\Cliente.class
 com\agendamento\shows\controller\PagamentoController.class
 com\agendamento\shows\controller\ErrorController.class
