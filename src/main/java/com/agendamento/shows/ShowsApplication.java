@@ -29,7 +29,7 @@ public class ShowsApplication implements CommandLineRunner {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
-	@Value("${mercadoPagoAccessToken}")
+	@Value("${mpAccessToken}")
 	private String mercadoPagoAccessToken;
 
 	public static void main(String[] args) {
