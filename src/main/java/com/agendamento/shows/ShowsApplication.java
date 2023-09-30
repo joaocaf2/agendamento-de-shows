@@ -62,7 +62,7 @@ public class ShowsApplication implements CommandLineRunner {
 	}
 
 	private void criaUsuarioInicial(String email, String senha, String nomeRole) {
-		System.out.println("Cadastrando usuario inicial..." + email);
+		System.out.println("Cadastrando usuario inicial... " + email);
 		Usuario usuario = new Usuario();
 		usuario.setEmail(email);
 		usuario.setSenha(new BCryptPasswordEncoder().encode(senha));

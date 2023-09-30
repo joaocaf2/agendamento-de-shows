@@ -22,12 +22,21 @@ public class DataConfiguration {
 	private DriverManagerDataSource configuraDadosDoMySQL() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("org.mariadb.jdbc.Driver");
-		String host;
+		String host, port;
 		host = determinaOLocalHost();
-		dataSource.setUrl("jdbc:mysql://" + host + ":3306/shows?createDatabaseIfNotExist=true");
+		port = determinaAPorta();
+		dataSource.setUrl("jdbc:mysql://" + host + ":" + port + "/shows?createDatabaseIfNotExist=true");
 		dataSource.setUsername(System.getenv("userBd"));
 		dataSource.setPassword(System.getenv("passwdBd"));
 		return dataSource;
+	}
+
+	private String determinaAPorta() {
+		if (portaNaoInformada()) {
+			return "3306";
+		} else {
+			return System.getenv("MYSQLPORT");
+		}
 	}
 
 	private String determinaOLocalHost() {
@@ -42,6 +51,10 @@ public class DataConfiguration {
 
 	private boolean localHostNaoInformado() {
 		return System.getenv("MYSQL_HOST") == null;
+	}
+
+	private boolean portaNaoInformada() {
+		return System.getenv("MYSQLPORT") == null;
 	}
 
 	@Bean

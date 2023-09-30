@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
@@ -18,12 +20,15 @@ public class Usuario implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
 	private String email;
 	private String senha;
 	private boolean ativo;
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	@Cascade(CascadeType.PERSIST)
+	@Cascade(CascadeType.MERGE)
 	private List<Role> roles;
 
 	public Usuario() {
@@ -52,6 +57,14 @@ public class Usuario implements UserDetails {
 
 	public List<Role> getRoles() {
 		return roles;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public void setRoles(List<Role> roles) {
