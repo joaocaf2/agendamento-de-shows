@@ -34,6 +34,11 @@ public class Usuario implements UserDetails {
 	public Usuario() {
 		setAtivo(true);
 	}
+	public Usuario(String email, String senha){
+		setAtivo(true);
+		this.email = email;
+		this.senha = senha;
+	}
 
 	public boolean isAtivo() {
 		return ativo;

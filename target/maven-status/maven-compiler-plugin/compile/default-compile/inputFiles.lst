@@ -5,6 +5,7 @@ D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\v
 D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\conf\SpringSecurityConfig.java
 D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\model\Cliente.java
 D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\controller\HomeController.java
+D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\factory\FabricaDeUsuario.java
 D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\validator\StringMinValidator.java
 D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\conf\UserDetailsServiceImpl.java
 D:\Documentos\eclipse-workspace-2023\shows\src\main\java\com\agendamento\shows\controller\UsuarioController.java

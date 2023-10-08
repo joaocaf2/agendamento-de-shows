@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.agendamento.shows.factory.FabricaDeUsuario;
 import com.agendamento.shows.model.Role;
 import com.agendamento.shows.model.Showw;
 import com.agendamento.shows.model.Usuario;
@@ -25,7 +25,8 @@ public class ShowsApplication implements CommandLineRunner {
 	private ShowRepository showRepository;
 	@Autowired
 	private RoleRepository roleRepository;
-
+	@Autowired
+	private FabricaDeUsuario fabricaDeUsuario;
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
@@ -40,8 +41,8 @@ public class ShowsApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		populaShowsIniciaisCasoNecessario();
 		if (verificaSeNaoExisteUsuariosNoBd()) {
-			criaUsuarioInicial("admin", System.getenv("passwdAdm"), "ADM");
-			criaUsuarioInicial("usuario", "1234usuariox", "USER");
+			criaUsuarioInicialDoBd("adm", System.getenv("passwdAdm"), "ADM");
+			criaUsuarioInicialDoBd("usuario", "1234x", "USER");
 		}
 		setaTokensDeConfiguracaoMP();
 	}
@@ -61,11 +62,9 @@ public class ShowsApplication implements CommandLineRunner {
 		}
 	}
 
-	private void criaUsuarioInicial(String email, String senha, String nomeRole) {
-		System.out.println("Cadastrando usuario inicial... " + email);
-		Usuario usuario = new Usuario();
-		usuario.setEmail(email);
-		usuario.setSenha(new BCryptPasswordEncoder().encode(senha));
+	private void criaUsuarioInicialDoBd(String email, String senha, String nomeRole) {
+		Usuario usuario = fabricaDeUsuario.comEmailESenha(email, senha);
+		System.out.println("Cadastrando usuario inicial... " + usuario.getEmail());
 		Role role = new Role();
 		role.setNome(nomeRole);
 		roleRepository.save(role);

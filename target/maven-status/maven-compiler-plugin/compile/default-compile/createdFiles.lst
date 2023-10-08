@@ -5,6 +5,7 @@ com\agendamento\shows\controller\ShowController.class
 com\agendamento\shows\model\Role.class
 com\agendamento\shows\conf\DataConfiguration.class
 com\agendamento\shows\model\Showw.class
+com\agendamento\shows\factory\FabricaDeUsuario.class
 com\agendamento\shows\repository\RoleRepository.class
 com\agendamento\shows\controller\UsuarioController.class
 com\agendamento\shows\model\Cliente.class
