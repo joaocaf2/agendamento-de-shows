@@ -14,6 +14,10 @@ public class Endereco {
 	private String bairro;
 	private String cep;
 
+	protected Endereco() {
+
+	}
+
 	public String getRua() {
 		return rua;
 	}
@@ -36,6 +40,11 @@ public class Endereco {
 
 	public void setCep(String cep) {
 		this.cep = cep;
+	}
+
+	@Override
+	public String toString() {
+		return "Rua: " + this.getRua() + " Bairro: " + this.getBairro() + " CEP: " + this.getCep();
 	}
 
 }
