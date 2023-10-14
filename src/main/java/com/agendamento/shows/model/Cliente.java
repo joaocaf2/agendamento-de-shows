@@ -1,15 +1,19 @@
 package com.agendamento.shows.model;
 
-import javax.persistence.OneToOne;
+import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Cliente {
-
+	@Id
+	private String cpf;
 	private String nome;
 	private String sobrenome;
-	private Endereco endereco;
-
-	@OneToOne
-	private Usuario usuario;
+	@OneToMany
+	private List<Endereco> endereco;
 
 	public String getNome() {
 		return nome;
@@ -27,20 +31,21 @@ public class Cliente {
 		this.sobrenome = sobrenome;
 	}
 
-	public Endereco getEndereco() {
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public List<Endereco> getEndereco() {
 		return endereco;
 	}
 
-	public void setEndereco(Endereco endereco) {
+	public void setEndereco(List<Endereco> endereco) {
 		this.endereco = endereco;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
 
 }

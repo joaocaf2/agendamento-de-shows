@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -27,6 +28,8 @@ public class Usuario implements UserDetails {
 	private String email;
 	private String senha;
 	private boolean ativo;
+	@OneToOne
+	private Cliente cliente;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@Cascade(CascadeType.MERGE)

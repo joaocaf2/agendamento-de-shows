@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8">
-<title>Cadastro de usuário</title>
-<th:block th:include="~{fragments/base::head}">/>
+	<meta charset="utf-8">
+	<title>Cadastro de usuário</title>
+	<th:block th:include="~{fragments/base::head}">/>
 
 </head>
 
@@ -18,14 +19,19 @@
 			<form method="post" th:object="${usuario}" th:action="@{/usuario/novo}">
 
 				<div class="form-group">
-					<input th:field="*{email}" type="text" th:errorClass="is-invalid"
-						placeholder="E-mail" class="form-control">
+					<input th:field="*{email}" type="text" th:errorClass="is-invalid" placeholder="E-mail"
+						class="form-control">
 					<div class="invalid-feedback" th:errors="*{email}"></div>
+				</div>
+				<div class="form-group">
+					<input th:field="*{nome}" type="text" th:errorClass="is-invalid" placeholder="Nome"
+						class="form-control">
+					<div class="invalid-feedback" th:errors="*{nome}"></div>
 				</div>
 
 				<div class="form-group">
-					<input type="password"th:field="*{senha}" class="form-control"
-						th:errorClass="is-invalid" placeholder="Senha">
+					<input type="password" th:field="*{senha}" class="form-control" th:errorClass="is-invalid"
+						placeholder="Senha">
 					<div class="invalid-feedback" th:errors="*{senha}"></div>
 				</div>
 
