@@ -14,6 +14,7 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 public class Usuario implements UserDetails {
@@ -34,7 +35,8 @@ public class Usuario implements UserDetails {
 	public Usuario() {
 		setAtivo(true);
 	}
-	public Usuario(String email, String senha){
+
+	public Usuario(String email, String senha) {
 		setAtivo(true);
 		this.email = email;
 		this.senha = senha;
@@ -81,7 +83,8 @@ public class Usuario implements UserDetails {
 	}
 
 	public void setSenha(String senha) {
-		this.senha = senha;
+		String senhaEncode = new BCryptPasswordEncoder().encode(senha);
+		this.senha = senhaEncode;
 	}
 
 	@Override

@@ -53,10 +53,10 @@ public class ShowsApplication implements CommandLineRunner {
 
 	private void populaShowsIniciaisCasoNecessario() {
 		if (verificaSeNaoExistemShowsNoBd()) {
-			Showw show = criaUmShow("Metalica", "Vai acontecer em Florianópolis", new BigDecimal("900.50"),
+			Showw show = criaUmShow("Metalica", "Vai acontecer em Florianópolis", new BigDecimal("900"),
 					"https://upload.wikimedia.org/wikipedia/commons/b/b7/Metallica_logo.png");
 			showRepository.save(show);
-			show = criaUmShow("A7x", "Show Avenged Sevenfold em SP", new BigDecimal("1200.0"),
+			show = criaUmShow("A7x", "Show Avenged Sevenfold em SP", new BigDecimal("800.0"),
 					"https://i.etsystatic.com/6608809/r/il/921fcd/3555531381/il_794xN.3555531381_nbdc.jpg");
 			showRepository.save(show);
 		}

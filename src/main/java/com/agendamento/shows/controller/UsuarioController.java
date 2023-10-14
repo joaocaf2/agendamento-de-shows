@@ -21,7 +21,7 @@ public class UsuarioController {
 	private RoleRepository roleRepository;
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-	
+
 	@PostMapping("/novo")
 	public String novo(Usuario usuario) {
 		Role role = roleRepository.findById("USER").get();
@@ -35,5 +35,5 @@ public class UsuarioController {
 	public String cadastrar(Usuario usuario) {
 		return "usuario/formulario";
 	}
-
+	
 }

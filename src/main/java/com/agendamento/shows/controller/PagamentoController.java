@@ -21,8 +21,10 @@ import com.mercadopago.resources.preference.Preference;
 
 /* 
  * Cartão de teste:
- * 5031 4332 1540 6351	123 11/25
- * 
+ * 5031 4332 1540 6351	
+ * 123 
+ * 11/25
+ * 12345678909 
  * */
 
 @Controller
@@ -37,6 +39,11 @@ public class PagamentoController {
 		return "redirect:/pagamento/checkoutproform";
 	}
 
+	@GetMapping("/checkout-transparente")
+	public String checkoutTransparente() {
+		return "/pagamento/checkout-transparente";
+	}
+
 	@PostMapping("/checkoutproform")
 	public String checkoutProForm(Model model, Showw show) throws MPException, MPApiException {
 		show = buscaOShowASerComprado(show);
@@ -44,15 +51,15 @@ public class PagamentoController {
 		PreferenceClient client = new PreferenceClient();
 		Preference preference = client.create(preferenceRequest);
 		model.addAttribute("preferenceId", preference.getId());
-		return "pagamento/checkoutpro";
+		return "pagamento/checkout-pro";
 	}
 
 	private PreferenceRequest criaAPreferenceRequestdoMP(Showw show) {
-		PreferenceItemRequest itemRequest = PreferenceItemRequest.builder().id("1234").title(show.getNome())
-				.description(show.getDescricao()).pictureUrl(show.getPosterShow()).categoryId("shows").quantity(1)
-				.currencyId("BRL").unitPrice(show.getValorIngresso()).build();
+		PreferenceItemRequest itemDaCompra = PreferenceItemRequest.builder().id(String.valueOf(show.getId()))
+				.title(show.getNome()).description(show.getDescricao()).pictureUrl(show.getPosterShow())
+				.categoryId("shows").quantity(1).currencyId("BRL").unitPrice(show.getValorIngresso()).build();
 		List<PreferenceItemRequest> items = new ArrayList<>();
-		items.add(itemRequest);
+		items.add(itemDaCompra);
 		PreferenceRequest preferenceRequest = PreferenceRequest.builder().items(items).build();
 		return preferenceRequest;
 	}
