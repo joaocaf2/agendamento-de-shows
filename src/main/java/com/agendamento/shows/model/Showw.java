@@ -102,9 +102,6 @@ public class Showw {
 		this.descricao = descricao;
 	}
 
-	public BigDecimal getValor() {
-		return valorIngresso;
-	}
 
 	public void setValorIngresso(BigDecimal valorIngresso) {
 		this.valorIngresso = valorIngresso;

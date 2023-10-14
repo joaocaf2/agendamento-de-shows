@@ -12,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.agendamento.shows.factory.FabricaDeUsuario;
 import com.agendamento.shows.model.Role;
 import com.agendamento.shows.model.Showw;
+import com.agendamento.shows.model.ShowwBuilder;
 import com.agendamento.shows.model.Usuario;
 import com.agendamento.shows.repository.RoleRepository;
 import com.agendamento.shows.repository.ShowRepository;
@@ -53,11 +54,13 @@ public class ShowsApplication implements CommandLineRunner {
 
 	private void populaShowsIniciaisCasoNecessario() {
 		if (verificaSeNaoExistemShowsNoBd()) {
-			Showw show = criaUmShow("Metalica", "Vai acontecer em Florianópolis", new BigDecimal("900"),
-					"https://upload.wikimedia.org/wikipedia/commons/b/b7/Metallica_logo.png");
+			Showw show = ShowwBuilder.builder().nome("Metalica").descricao("Vai acontecer em Florianópolis")
+					.valorIngresso(new BigDecimal("800"))
+					.posterShow("https://upload.wikimedia.org/wikipedia/commons/b/b7/Metallica_logo.png").build();
 			showRepository.save(show);
-			show = criaUmShow("A7x", "Show Avenged Sevenfold em SP", new BigDecimal("800.0"),
-					"https://i.etsystatic.com/6608809/r/il/921fcd/3555531381/il_794xN.3555531381_nbdc.jpg");
+			show = ShowwBuilder.builder().nome("A7x").descricao("Show a7x em SP").valorIngresso(new BigDecimal("500"))
+					.posterShow("https://i.etsystatic.com/6608809/r/il/921fcd/3555531381/il_794xN.3555531381_nbdc.jpg")
+					.build();
 			showRepository.save(show);
 		}
 	}
@@ -78,15 +81,6 @@ public class ShowsApplication implements CommandLineRunner {
 
 	private boolean verificaSeNaoExisteUsuariosNoBd() {
 		return usuarioRepository.findAll().isEmpty();
-	}
-
-	private Showw criaUmShow(String nome, String descricao, BigDecimal valorIngresso, String posterShow) {
-		Showw show = new Showw();
-		show.setNome(nome);
-		show.setDescricao(descricao);
-		show.setValorIngresso(valorIngresso);
-		show.setPosterShow(posterShow);
-		return show;
 	}
 
 }
