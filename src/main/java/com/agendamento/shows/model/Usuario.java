@@ -29,6 +29,7 @@ public class Usuario implements UserDetails {
 	private String senha;
 	private boolean ativo;
 	@OneToOne
+	@Cascade(CascadeType.PERSIST)
 	private Cliente cliente;
 
 	@ManyToMany(fetch = FetchType.EAGER)
@@ -107,26 +108,30 @@ public class Usuario implements UserDetails {
 
 	@Override
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
 		return this.ativo;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 }

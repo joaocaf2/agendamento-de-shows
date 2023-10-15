@@ -41,7 +41,7 @@ public class Showw {
 	@NotNull(message = "Data que o show ocorrerá é obrigatório")
 	private LocalDate dataShow;
 
-	public Showw() {
+	protected Showw() {
 
 	}
 
@@ -101,7 +101,6 @@ public class Showw {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
 
 	public void setValorIngresso(BigDecimal valorIngresso) {
 		this.valorIngresso = valorIngresso;

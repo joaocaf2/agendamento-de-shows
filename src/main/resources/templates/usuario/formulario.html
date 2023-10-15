@@ -24,9 +24,19 @@
 					<div class="invalid-feedback" th:errors="*{email}"></div>
 				</div>
 				<div class="form-group">
-					<input th:field="*{nome}" type="text" th:errorClass="is-invalid" placeholder="Nome"
+					<input th:field="*{cliente.nome}" type="text" th:errorClass="is-invalid" placeholder="Nome"
 						class="form-control">
-					<div class="invalid-feedback" th:errors="*{nome}"></div>
+					<div class="invalid-feedback" th:errors="*{cliente.nome}"></div>
+				</div>
+				<div class="form-group">
+					<input th:field="*{cliente.nome}" type="text" th:errorClass="is-invalid" placeholder="Sobrenome"
+						class="form-control">
+					<div class="invalid-feedback" th:errors="*{cliente.sobrenome}"></div>
+				</div>
+				<div class="form-group">
+					<input th:field="*{cliente.cpf}" type="text" th:errorClass="is-invalid" placeholder="CPF"
+						class="form-control">
+					<div class="invalid-feedback" th:errors="*{cliente.cpf}"></div>
 				</div>
 
 				<div class="form-group">

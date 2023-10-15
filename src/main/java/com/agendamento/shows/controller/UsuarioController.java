@@ -35,5 +35,5 @@ public class UsuarioController {
 	public String cadastrar(Usuario usuario) {
 		return "usuario/formulario";
 	}
-	
+
 }
