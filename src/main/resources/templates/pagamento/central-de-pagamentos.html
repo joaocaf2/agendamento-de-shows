@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Formulário de pagamento Checkout PRO</title>
+	<title>Formulário de pagamento</title>
 	<script src="https://sdk.mercadopago.com/js/v2"></script>
 	<th:block th:include="~{fragments/base::head}">/>
 </head>
@@ -14,12 +14,19 @@
 		<div th:replace="~{fragments/base::cabecalho}"></div>
 	</header>
 	<main>
-		<h1>Pagamento com Checkout PRO</h1>
-
+		<h1>Escolha o modo de paagr</h1>
+		<h2>Checkout PRO</h2>
 		<div sec:authorize="isAuthenticated()">
 			<div sec:authorize="hasAuthority('ADM')">
 				<div id="wallet_container"></div>
 			</div>
+		</div>
+		<div>
+			<form th:action="@{/pagamento/checkout-transparente}" th:object="${show}" method="post">
+				<input type="hidden" name="idShow" th:field="*{id}">
+				<button type="submit" class="btn btn-primary">
+					Checkout Transparente</button>
+			</form>
 		</div>
 	</main>
 	<div th:replace="~{fragments/base::rodape}"></div>

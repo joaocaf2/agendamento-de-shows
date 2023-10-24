@@ -7,7 +7,6 @@
 	<link rel="stylesheet" th:href="@{/css/detalheshow.css}" />
 	<th:block th:include="~{fragments/base::head}">/>
 
-
 </head>
 
 <body>
@@ -24,11 +23,10 @@
 				<p class="card-text" th:text="'Preço do ingresso: R$ '+ ${show.valorIngresso}"></p>
 			</div>
 
-			<form th:action="@{/pagamento/checkoutproform}" th:object="${show}" method="post">
+			<form th:action="@{/pagamento/centralpagamentoform}" th:object="${show}" method="post">
 				<input type="hidden" name="idShow" th:field="*{id}">
 				<button type="submit" class="btn btn-primary">
 					Comprar ingresso</button>
-
 			</form>
 		</div>
 

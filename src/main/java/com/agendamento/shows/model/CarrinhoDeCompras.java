@@ -1,8 +1,11 @@
 package com.agendamento.shows.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -64,6 +67,16 @@ public class CarrinhoDeCompras {
 
 	public Map<CarrinhoItem, Integer> getItens() {
 		return itens;
+	}
+
+	public List<Showw> getShowsDoCarrinho() {
+		Set<CarrinhoItem> keySet = itens.keySet();
+		List<CarrinhoItem> itensCarrinho = new ArrayList<CarrinhoItem>(keySet);
+		List<Showw> shows = new ArrayList<Showw>();
+		for (CarrinhoItem carrinhoItem : itensCarrinho) {
+			shows.add(carrinhoItem.getShow());
+		}
+		return shows;
 	}
 
 }

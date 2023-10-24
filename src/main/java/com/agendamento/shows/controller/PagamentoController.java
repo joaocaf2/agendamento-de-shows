@@ -3,13 +3,18 @@ package com.agendamento.shows.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.agendamento.shows.model.CarrinhoDeCompras;
+import com.agendamento.shows.model.CarrinhoItem;
 import com.agendamento.shows.model.Showw;
 import com.agendamento.shows.repository.ShowRepository;
 import com.mercadopago.client.preference.PreferenceClient;
@@ -34,24 +39,40 @@ public class PagamentoController {
 	@Autowired
 	private ShowRepository showRepository;
 
+	@Autowired
+	private CarrinhoDeCompras carrinhoDeCompras;
+
+	@Value("${mpPublicKey}")
+	private String mpPublicKey;
+
 	@GetMapping("/checkout-pro")
 	public String checkoutPro() {
 		return "redirect:/pagamento/checkoutproform";
 	}
 
-	@GetMapping("/checkout-transparente")
-	public String checkoutTransparente() {
+	@PostMapping("/checkout-transparente")
+	public String checkoutTransparenteForm(Showw show, Model model) {
+		model.addAttribute("mpPublicKey", mpPublicKey);
 		return "/pagamento/checkout-transparente";
 	}
 
-	@PostMapping("/checkoutproform")
-	public String checkoutProForm(Model model, Showw show) throws MPException, MPApiException {
+	@PostMapping
+	public String gerar(HttpServletRequest req) {
+		System.out.println("chamando gerar...");
+		System.out.println(req.getAttribute("token"));
+		return "/";
+	}
+
+	@PostMapping("/centralpagamentoform")
+	public String centralPagamentoForm(Model model, Showw show) throws MPException, MPApiException {
 		show = buscaOShowASerComprado(show);
 		PreferenceRequest preferenceRequest = criaAPreferenceRequestdoMP(show);
 		PreferenceClient client = new PreferenceClient();
 		Preference preference = client.create(preferenceRequest);
 		model.addAttribute("preferenceId", preference.getId());
-		return "pagamento/checkout-pro";
+		model.addAttribute("show", show);
+		carrinhoDeCompras.adicionaAoCarrinho(new CarrinhoItem(show));
+		return "pagamento/central-de-pagamentos";
 	}
 
 	private PreferenceRequest criaAPreferenceRequestdoMP(Showw show) {
