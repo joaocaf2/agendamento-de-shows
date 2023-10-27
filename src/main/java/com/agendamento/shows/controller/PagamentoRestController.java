@@ -1,8 +1,5 @@
 package com.agendamento.shows.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.agendamento.shows.dto.CardPaymentDTO;
 import com.agendamento.shows.dto.PaymentResponseDTO;
+import com.agendamento.shows.dto.PixInformationDTO;
 import com.agendamento.shows.model.CarrinhoDeCompras;
-import com.agendamento.shows.model.Showw;
-import com.mercadopago.client.common.IdentificationRequest;
-import com.mercadopago.client.payment.PaymentAdditionalInfoRequest;
-import com.mercadopago.client.payment.PaymentClient;
-import com.mercadopago.client.payment.PaymentCreateRequest;
-import com.mercadopago.client.payment.PaymentItemRequest;
-import com.mercadopago.client.payment.PaymentPayerRequest;
-import com.mercadopago.exceptions.MPApiException;
+import com.agendamento.shows.strategy.PagamentoPorCartao;
+import com.agendamento.shows.strategy.PagamentoPorPix;
 import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.payment.Payment;
 
@@ -35,58 +27,39 @@ public class PagamentoRestController {
 	@Autowired
 	private CarrinhoDeCompras carrinhoDeCompras;
 
-	@PostMapping("/gerar")
+	@Autowired
+	private PagamentoPorCartao pagamentoPorCartao;
+	@Autowired
+	private PagamentoPorPix pagamentoPorPix;
+
+	@PostMapping("/pagar-por-cartao")
 	@ResponseBody
 	public ResponseEntity<PaymentResponseDTO> formularioPagamento(@RequestBody CardPaymentDTO cardPaymentDTO,
 			HttpServletRequest request) throws MPException {
-		ArrayList<PaymentItemRequest> itens = new ArrayList<PaymentItemRequest>();
-		imprimeInformacoesCardPayment(cardPaymentDTO);
-		Integer qtdParcelas = cardPaymentDTO.getInstallments();
-		String cpf = cardPaymentDTO.getPayer().getIdentification().getNumber();
-		String type = cardPaymentDTO.getPayer().getIdentification().getType();
-		IdentificationRequest identification = IdentificationRequest.builder().type(type).number(cpf).build();
-		PaymentPayerRequest pagador = PaymentPayerRequest.builder().email(cardPaymentDTO.getPayer().getEmail())
-				.identification(identification).build();
-		List<Showw> showsDoCarrinho = carrinhoDeCompras.getShowsDoCarrinho();
-		for (Showw show : showsDoCarrinho) {
-			PaymentItemRequest itemRequest = PaymentItemRequest.builder().quantity(1).description(show.getDescricao())
-					.title(show.getNome()).unitPrice(show.getValorIngresso()).pictureUrl(show.getPosterShow()).build();
-			itens.add(itemRequest);
-		}
-		PaymentAdditionalInfoRequest informacoesAdicionais = PaymentAdditionalInfoRequest.builder().items(itens).build();
-
-		PaymentClient paymentClient = new PaymentClient();
-		PaymentCreateRequest pagamento = PaymentCreateRequest.builder()
-				.transactionAmount(carrinhoDeCompras.getTotalDoCarrinhoDeCompras()).additionalInfo(informacoesAdicionais)
-				.token(cardPaymentDTO.getToken()).description(cardPaymentDTO.getProductDescription())
-				.installments(qtdParcelas).paymentMethodId(cardPaymentDTO.getPaymentMethodId()).payer(pagador).build();
-		PaymentResponseDTO pagamentoRespostaDTO = new PaymentResponseDTO();
-		try {
-			Payment pagamentoGerado = paymentClient.create(pagamento);
-			Long idPagamento = pagamentoGerado.getId();
-			String statusDetail = pagamentoGerado.getStatusDetail();
-			String status = pagamentoGerado.getStatus();
-			pagamentoRespostaDTO = new PaymentResponseDTO(String.valueOf(idPagamento), status, statusDetail);
-		} catch (MPException | MPApiException e) {
-			System.err.println(e.getMessage());
-			e.printStackTrace();
-		}
+		pagamentoPorCartao = new PagamentoPorCartao(cardPaymentDTO, carrinhoDeCompras);
+		Payment pagamentoGerado = pagamentoPorCartao.pagar();
+		Long idPagamento = pagamentoGerado.getId();
+		String statusDetail = pagamentoGerado.getStatusDetail();
+		String status = pagamentoGerado.getStatus();
+		PaymentResponseDTO pagamentoRespostaDTO;
+		pagamentoRespostaDTO = new PaymentResponseDTO(String.valueOf(idPagamento), status, statusDetail);
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(pagamentoRespostaDTO);
 	}
 
+	@PostMapping("/pagar-por-pix")
+	@ResponseBody
+	public ResponseEntity<PaymentResponseDTO> pagarPorPix(@RequestBody PixInformationDTO pixInformation,
+			HttpServletRequest request) throws MPException {
+		pagamentoPorPix = new PagamentoPorPix(pixInformation, carrinhoDeCompras);
+		Payment pagamentoGerado = pagamentoPorPix.pagar();
+		Long idPagamento = pagamentoGerado.getId();
+		String statusDetail = pagamentoGerado.getStatusDetail();
+		String status = pagamentoGerado.getStatus();
+		PaymentResponseDTO pagamentoRespostaDTO;
+		pagamentoRespostaDTO = new PaymentResponseDTO(String.valueOf(idPagamento), status, statusDetail);
 
-	private void imprimeInformacoesCardPayment(CardPaymentDTO cardPaymentDTO) {
-		System.out.println("== Informacoes ==");
-		System.out.println(cardPaymentDTO.getInstallments());
-		System.out.println(cardPaymentDTO.getTransactionAmount());
-		System.out.println(cardPaymentDTO.getToken());
-		System.out.println(cardPaymentDTO.getPayer().getIdentification().getType());
-		System.out.println(cardPaymentDTO.getProductDescription());
-		System.out.println(cardPaymentDTO.getPayer().getEmail());
-		System.out.println(cardPaymentDTO.getPayer().getIdentification().getNumber());
-		System.out.println(cardPaymentDTO.getPayer().getIdentification().getType());
-		System.out.println("==================");
+		return ResponseEntity.status(HttpStatus.CREATED).body(pagamentoRespostaDTO);
 	}
 
 }

@@ -53,6 +53,7 @@ public class PagamentoController {
 	@PostMapping("/checkout-transparente")
 	public String checkoutTransparenteForm(Showw show, Model model) {
 		model.addAttribute("mpPublicKey", mpPublicKey);
+		model.addAttribute("totalDaCompra", carrinhoDeCompras.getTotalDoCarrinhoDeCompras());
 		return "/pagamento/checkout-transparente";
 	}
 

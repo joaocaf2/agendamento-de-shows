@@ -31,6 +31,21 @@
 	</header>
 	<main>
 		<h1>Pagamento com Checkout Transparente</h1>
+		<div class="form-check form-check-inline">
+			<input class="form-check-input" type="radio" id="cartao" onChange="onClickCheckbox(this);"
+				name="formaPagamento" value="cartao" checked> <label class="form-check-label" for="cartao">Cartão de
+				crédito</label>
+		</div>
+		<div class="form-check form-check-inline">
+			<input class="form-check-input" type="radio" id="pix" onChange="onClickCheckbox(this);"
+				name="formaPagamento" value="pix">
+			<label class="form-check-label" for="pix">PIX</label>
+		</div>
+		<div class="form-check form-check-inline">
+			<input class="form-check-input" type="radio" id="boleto" onChange="onClickCheckbox(this);"
+				name="formaPagamento" value="boleto"> <label class="form-check-label" for="boleto">Boleto</label>
+		</div>
+
 		<form id="form-checkout">
 			<div class="form-group">
 				<input type="text" class="form-control" name="cardNumber" id="form-checkout__cardNumber" />
@@ -61,13 +76,21 @@
 			<button class="btn btn-primary" type="submit" id="form-checkout__submit">Pagar</button>
 
 		</form>
+
+		<div th:replace="~{fragments/formulario-pix}"></div>
+
 		<input type="hidden" id="mpPublicKey" th:value="${mpPublicKey}" />
 	</main>
 	<script th:inline="javascript">
+		document.getElementById('form-checkout-pix').style.display = "none";
+		document.getElementById("form-checkout-pix").addEventListener("submit", function (e) {
+			e.preventDefault();
+			realizaPagamento(document.getElementById('pix').value);
+		});
 		const mpPublicKey = document.getElementById("mpPublicKey").value;
 		const mp = new MercadoPago(mpPublicKey);
 		const cardForm = mp.cardForm({
-			amount: '500',
+			amount: '500.0',
 			autoMount: true,
 			form: {
 				id: "form-checkout",
@@ -131,7 +154,7 @@
 						identificationType,
 					} = cardForm.getCardFormData();
 
-					fetch("/pagamento-rest/gerar", {
+					fetch("/pagamento-rest/pagar-por-cartao", {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json",
@@ -172,6 +195,53 @@
 				},
 			},
 		});
+
+		function onClickCheckbox(checkbox) {
+			switch (checkbox.value) {
+				case 'cartao':
+					document.getElementById('form-checkout-pix').style.display = "none";
+					document.getElementById('form-checkout').style.display = "block";
+					break;
+				case 'pix':
+					document.getElementById('form-checkout-pix').style.display = "block";
+					document.getElementById('form-checkout').style.display = "none";
+					break;
+				case 'boleto':
+					break;
+			}
+		}
+
+		function realizaPagamento(tipo) {
+			const nome = document.getElementById("form-checkout-pix_nome").value;
+			const sobrenome = document.getElementById("form-checkout-pix_sobrenome").value;
+			const email = document.getElementById("form-checkout-pix_email").value;
+			const tipoIdentificacao = document.getElementById("form-checkout-pix_tipoIdentificacao").value;
+			const numeroIdentificacao = document.getElementById("form-checkout-pix_numeroIdentificacao").value;
+			fetch("/pagamento-rest/pagar-por-pix", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					paymentMethodId: tipo,
+					description: "produto muito bom",
+					transactionAmount: Number('300.50'),
+					payer: {
+						email: "joaquim@hotmail.com",
+						identification: {
+							type: tipoIdentificacao,
+							number: numeroIdentificacao,
+						},
+					},
+				}),
+			})
+				.then(response => {
+					//	return response.json();
+				})
+				.then(result => {
+					window.location.href = '/';
+				})
+		}
 
 	</script>
 	<div th:replace="~{fragments/base::rodape}"></div>

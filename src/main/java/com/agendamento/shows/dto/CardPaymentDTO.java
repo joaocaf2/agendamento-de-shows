@@ -84,4 +84,20 @@ public class CardPaymentDTO {
 	public void setPayer(PayerDTO payer) {
 		this.payer = payer;
 	}
+
+	public void imprimeInformacoesCardPayment() {
+		System.out.println("== Informacoes ==");
+		System.out.println("Parcelas: " + this.getInstallments());
+		System.out.println("Valor da compra: " + this.getTransactionAmount());
+		System.out.println("Token:" + this.getToken());
+		System.out.println("Type: " + this.getPayer().getIdentification().getType());
+		System.out.println("Descrição da compra: " + this.getProductDescription());
+		System.out.println("Email pagador: " + this.getPayer().getEmail());
+		System.out.println("Numero documento: " + this.getPayer().getIdentification().getNumber());
+		System.out.println("Tipo documento: " + this.getPayer().getIdentification().getType());
+		System.out.println("Payment Method ID: " + this.getPaymentMethodId());
+		System.out.println("Transaction Amount: " + this.getTransactionAmount());
+		System.out.println("==================");
+	}
+
 }

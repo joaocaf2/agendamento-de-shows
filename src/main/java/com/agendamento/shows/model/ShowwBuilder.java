@@ -30,6 +30,10 @@ public class ShowwBuilder {
 		return this;
 	}
 
+	public ShowwBuilder valorIngresso(String valorIngresso) {
+		this.show.setValorIngresso(new BigDecimal(valorIngresso));
+		return this;
+	}
 
 	public ShowwBuilder dataShow(LocalDate dataShow) {
 		this.show.setDataShow(dataShow);
