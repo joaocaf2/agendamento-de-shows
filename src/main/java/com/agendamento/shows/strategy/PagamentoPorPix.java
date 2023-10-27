@@ -39,7 +39,6 @@ public class PagamentoPorPix implements PagamentoStrategy {
 		ArrayList<PaymentItemRequest> itens = new ArrayList<PaymentItemRequest>();
 		String cpf = pixInformationDTO.getPayer().getIdentification().getNumber();
 		String type = pixInformationDTO.getPayer().getIdentification().getType();
-		pixInformationDTO.imprimeInformacoesCardPayment();
 		IdentificationRequest identification = IdentificationRequest.builder().type(type).number(cpf).build();
 		PaymentPayerRequest pagador = PaymentPayerRequest.builder().email("kaoaoao@hotmail.com")
 				.identification(identification).build();
@@ -64,9 +63,6 @@ public class PagamentoPorPix implements PagamentoStrategy {
 				String qrCodeBase64 = pagamentoGerado.getPointOfInteraction().getTransactionData().getQrCodeBase64();
 				pixInformationDTO.setQrCodeBase64(qrCodeBase64);
 			}
-			System.out.println(pagamentoGerado.getTransactionAmount());
-			System.out.println(pagamentoGerado.getDescription());
-			System.out.println(pagamentoGerado.getInstallments());
 			return pagamentoGerado;
 		} catch (MPException | MPApiException e) {
 			System.err.println(e.getMessage());

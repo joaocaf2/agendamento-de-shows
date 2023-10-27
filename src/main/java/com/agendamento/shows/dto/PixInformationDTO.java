@@ -49,7 +49,7 @@ public class PixInformationDTO {
 		this.qrCodeBase64 = qrCodeBase64;
 	}
 
-	public void imprimeInformacoesCardPayment() {
+	public void imprimeInformacoesPagamentoPorPix() {
 		System.out.println("== Informacoes ==");
 		System.out.println("Valor da compra: " + this.getTransactionAmount());
 		System.out.println("Type: " + this.getPayer().getIdentification().getType());
