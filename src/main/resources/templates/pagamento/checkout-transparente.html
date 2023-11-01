@@ -223,16 +223,18 @@
 					"Content-Type": "application/json",
 				},
 				body: JSON.stringify({
-					paymentMethodId: tipo,
-					description: "produto muito bom",
-					transactionAmount: Number('300.50'),
-					payer: {
-						email: "joaquim@hotmail.com",
-						identification: {
-							type: tipoIdentificacao,
-							number: numeroIdentificacao,
+					basicInformationDTO: {
+						paymentMethodId: tipo,
+						description: "produto muito bom",
+						transactionAmount: Number('300.50'),
+						payer: {
+							email: "joaquim@hotmail.com",
+							identification: {
+								type: tipoIdentificacao,
+								number: numeroIdentificacao,
+							},
 						},
-					},
+					}
 				}),
 			})
 				.then(response => {

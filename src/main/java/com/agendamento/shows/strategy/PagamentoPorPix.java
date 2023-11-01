@@ -36,9 +36,10 @@ public class PagamentoPorPix implements PagamentoStrategy {
 
 	@Override
 	public Payment pagar() {
+		pixInformationDTO.imprimeInformacoesPagamentoPorPix();
 		ArrayList<PaymentItemRequest> itens = new ArrayList<PaymentItemRequest>();
-		String cpf = pixInformationDTO.getPayer().getIdentification().getNumber();
-		String type = pixInformationDTO.getPayer().getIdentification().getType();
+		String cpf = pixInformationDTO.getBasicInformationDTO().getPayer().getIdentification().getNumber();
+		String type = pixInformationDTO.getBasicInformationDTO().getPayer().getIdentification().getType();
 		IdentificationRequest identification = IdentificationRequest.builder().type(type).number(cpf).build();
 		PaymentPayerRequest pagador = PaymentPayerRequest.builder().email("kaoaoao@hotmail.com")
 				.identification(identification).build();
@@ -54,8 +55,8 @@ public class PagamentoPorPix implements PagamentoStrategy {
 		PaymentClient paymentClient = new PaymentClient();
 		PaymentCreateRequest pagamento = PaymentCreateRequest.builder()
 				.transactionAmount(carrinhoDeCompras.getTotalDoCarrinhoDeCompras())
-				.additionalInfo(informacoesAdicionais).description(pixInformationDTO.getDescription())
-				.paymentMethodId(pixInformationDTO.getPaymentMethodId()).payer(pagador).build();
+				.additionalInfo(informacoesAdicionais).description(pixInformationDTO.getBasicInformationDTO().getDescription())
+				.paymentMethodId(pixInformationDTO.getBasicInformationDTO().getPaymentMethodId()).payer(pagador).build();
 		Payment pagamentoGerado = null;
 		try {
 			pagamentoGerado = paymentClient.create(pagamento);
